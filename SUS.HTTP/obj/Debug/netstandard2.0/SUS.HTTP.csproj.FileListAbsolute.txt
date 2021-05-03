@@ -1,0 +1,9 @@
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\bin\Debug\netstandard2.0\SUS.HTTP.deps.json
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\bin\Debug\netstandard2.0\SUS.HTTP.dll
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\bin\Debug\netstandard2.0\SUS.HTTP.pdb
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.csprojAssemblyReference.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.AssemblyInfoInputs.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.AssemblyInfo.cs
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.csproj.CoreCompileInputs.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.dll
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.pdb

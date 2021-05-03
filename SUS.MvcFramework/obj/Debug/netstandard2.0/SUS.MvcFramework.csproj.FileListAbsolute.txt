@@ -1,0 +1,12 @@
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.deps.json
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.dll
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.pdb
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.HTTP.dll
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.HTTP.pdb
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csprojAssemblyReference.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.AssemblyInfoInputs.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.AssemblyInfo.cs
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csproj.CoreCompileInputs.cache
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csproj.CopyComplete
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.dll
+D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.pdb

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "OkNJrMyUmdZjANGevcbVBj6qOys1sf0bNm9nw6vKgQ9xVKi5omhWMXftnhQKEuxQtbwgWhVndtKav8LD2ZrJZQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ddobr\\source\\repos\\SUS\\SUS.HTTP\\SUS.HTTP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ddobr\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\ddobr\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
