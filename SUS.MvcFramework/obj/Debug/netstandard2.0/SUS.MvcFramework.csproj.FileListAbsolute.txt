@@ -10,3 +10,15 @@ D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj
 D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csproj.CopyComplete
 D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.dll
 D:\csharp-web-master\csharp-web-master\2020-Sept-Season\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.pdb
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.deps.json
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.dll
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.MvcFramework.pdb
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.HTTP.dll
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\bin\Debug\netstandard2.0\SUS.HTTP.pdb
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csprojAssemblyReference.cache
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.AssemblyInfoInputs.cache
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.AssemblyInfo.cs
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csproj.CoreCompileInputs.cache
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.csproj.CopyComplete
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.dll
+C:\Users\ddobr\source\repos\SUS\SUS.MvcFramework\obj\Debug\netstandard2.0\SUS.MvcFramework.pdb
