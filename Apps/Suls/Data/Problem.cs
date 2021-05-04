@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Suls.Data
@@ -8,6 +9,7 @@ namespace Suls.Data
         public Problem()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Submissions = new HashSet<Submission>();
         }
 
         public string Id { get; set; }
@@ -17,5 +19,7 @@ namespace Suls.Data
 
         [MaxLength(300)]
         public int Points { get; set; }
+
+        public ICollection<Submission> Submissions { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Suls.Data;
 namespace Suls.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210503080404_InitializingDb")]
-    partial class InitializingDb
+    [Migration("20210504065322_Initializing")]
+    partial class Initializing
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,16 +98,26 @@ namespace Suls.Migrations
             modelBuilder.Entity("Suls.Data.Submission", b =>
                 {
                     b.HasOne("Suls.Data.Problem", "Problem")
-                        .WithMany()
+                        .WithMany("Submissions")
                         .HasForeignKey("ProblemId");
 
                     b.HasOne("Suls.Data.User", "User")
-                        .WithMany()
+                        .WithMany("Submissions")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Problem");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Suls.Data.Problem", b =>
+                {
+                    b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("Suls.Data.User", b =>
+                {
+                    b.Navigation("Submissions");
                 });
 #pragma warning restore 612, 618
         }

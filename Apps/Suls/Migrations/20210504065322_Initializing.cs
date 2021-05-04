@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Suls.Migrations
 {
-    public partial class InitializingDb : Migration
+    public partial class Initializing : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

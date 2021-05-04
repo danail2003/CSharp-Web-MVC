@@ -96,16 +96,26 @@ namespace Suls.Migrations
             modelBuilder.Entity("Suls.Data.Submission", b =>
                 {
                     b.HasOne("Suls.Data.Problem", "Problem")
-                        .WithMany()
+                        .WithMany("Submissions")
                         .HasForeignKey("ProblemId");
 
                     b.HasOne("Suls.Data.User", "User")
-                        .WithMany()
+                        .WithMany("Submissions")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Problem");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Suls.Data.Problem", b =>
+                {
+                    b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("Suls.Data.User", b =>
+                {
+                    b.Navigation("Submissions");
                 });
 #pragma warning restore 612, 618
         }
