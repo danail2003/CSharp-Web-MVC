@@ -58,5 +58,28 @@ namespace SharedTrip.Services
                 Seats = x.Seats
             }).FirstOrDefault();
         }
+
+        public bool HasAlreadyAddedUser(string tripId, string userId)
+        {
+            return this.db.UserTrips.Any(x => x.TripId == tripId && x.UserId == userId);
+        }
+
+        public bool HasSpace(string tripId)
+        {
+            int space = this.db.Trips.FirstOrDefault(x => x.Id == tripId).Seats;
+
+            return this.db.UserTrips.Where(x => x.TripId == tripId).Count() < space;
+        }
+
+        public void Join(string tripId, string userId)
+        {
+            this.db.UserTrips.Add(new UserTrip
+            {
+                TripId = tripId,
+                UserId = userId
+            });
+
+            this.db.SaveChanges();
+        }
     }
 }

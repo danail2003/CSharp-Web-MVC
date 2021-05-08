@@ -87,5 +87,24 @@ namespace SharedTrip.Controllers
 
             return this.View(trip);
         }
+
+        public HttpResponse AddUserToTrip(string tripId)
+        {
+            string userId = this.GetUserId();
+
+            if (!this.service.HasSpace(tripId))
+            {
+                return this.Error("No have enough space.");
+            }
+
+            if (this.service.HasAlreadyAddedUser(tripId, userId))
+            {
+                return this.Redirect($"/Trips/Details?tripId={tripId}");
+            }
+
+            this.service.Join(tripId, userId);
+
+            return this.Redirect("/Trips/All");
+        }
     }
 }
