@@ -6,6 +6,7 @@
     using Data;
     using SUS.HTTP;
     using SUS.MvcFramework;
+    using Git.Services;
 
     public class Startup : IMvcApplication
     {
@@ -16,7 +17,7 @@
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.Add<IUsersService, UsersService>();
         }
     }
 }

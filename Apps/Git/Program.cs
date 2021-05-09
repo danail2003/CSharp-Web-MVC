@@ -6,9 +6,9 @@
 
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            await Host.CreateHostAsync(new Startup());
+            await Host.CreateHostAsync(new Startup(), 80);
         }
     }
 }
