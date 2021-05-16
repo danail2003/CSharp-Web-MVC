@@ -5,6 +5,7 @@
     using BattleCards.Data;
     using SUS.HTTP;
     using SUS.MvcFramework;
+    using BattleCards.Services;
 
     public class Startup : IMvcApplication
     {
@@ -15,7 +16,7 @@
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.Add<IUsersService, UsersService>();
         }
     }
 }
