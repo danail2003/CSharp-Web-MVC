@@ -15,9 +15,9 @@ namespace SharedTrip.ViewModels.Trips
 
         public string DepartureTimeAsString => this.DepartureTime.ToString(CultureInfo.GetCultureInfo("bg-BG"));
 
-        public int AvailableSeats => this.Seats - this.UsedSeats;
-
         public int Seats { get; set; }
+
+        public int AvailableSeats => this.Seats - this.UsedSeats;
 
         public int UsedSeats { get; set; }
     }

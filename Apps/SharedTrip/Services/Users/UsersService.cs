@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SharedTrip.Data;
+using SharedTrip.ViewModels.Users;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using SharedTrip.Data;
-using SharedTrip.ViewModels;
 
-namespace SharedTrip.Services
+namespace SharedTrip.Services.Users
 {
     public class UsersService : IUsersService
     {
@@ -15,9 +17,9 @@ namespace SharedTrip.Services
             this.db = db;
         }
 
-        public string GetUserId(string username, string password)
+        public string GetUserId(LoginInputModel model)
         {
-            return this.db.Users.FirstOrDefault(x => x.Username == username && x.Password == Hash(password)).Id;
+            return this.db.Users.FirstOrDefault(x => x.Username == model.Username && x.Password == Hash(model.Password)).Id;
         }
 
         public bool IsEmailAvailable(string email)
@@ -25,9 +27,9 @@ namespace SharedTrip.Services
             return this.db.Users.Any(x => x.Email == email);
         }
 
-        public bool IsUsernameAndPasswordMatch(string username, string password)
+        public bool IsUsernameAndPasswordMatch(LoginInputModel model)
         {
-            return this.db.Users.Any(x => x.Username == username && x.Password == Hash(password));
+            return this.db.Users.Any(x => x.Username == model.Username && x.Password == Hash(model.Password));
         }
 
         public bool IsUsernameAvailable(string username)
@@ -41,7 +43,7 @@ namespace SharedTrip.Services
             {
                 Username = model.Username,
                 Email = model.Email,
-                Password = Hash(model.Password)
+                Password = Hash(model.Password),
             });
 
             this.db.SaveChanges();
@@ -50,7 +52,7 @@ namespace SharedTrip.Services
         private string Hash(string password)
         {
             var bytes = new UTF8Encoding().GetBytes(password);
-            var hashBytes = System.Security.Cryptography.MD5.Create().ComputeHash(bytes);
+            var hashBytes = MD5.Create().ComputeHash(bytes);
             return Convert.ToBase64String(hashBytes);
         }
     }

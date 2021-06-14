@@ -15,4 +15,4 @@ C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.Assem
 C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.csproj.CoreCompileInputs.cache
 C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.dll
 C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.pdb
-C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.csprojAssemblyReference.cache
+C:\Users\ddobr\source\repos\SUS\SUS.HTTP\obj\Debug\netstandard2.0\SUS.HTTP.csproj.AssemblyReference.cache

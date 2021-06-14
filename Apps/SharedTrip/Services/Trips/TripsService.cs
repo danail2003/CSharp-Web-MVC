@@ -5,7 +5,7 @@ using System.Linq;
 using SharedTrip.Data;
 using SharedTrip.ViewModels.Trips;
 
-namespace SharedTrip.Services
+namespace SharedTrip.Services.Trips
 {
     public class TripsService : ITripsService
     {
@@ -16,16 +16,16 @@ namespace SharedTrip.Services
             this.db = db;
         }
 
-        public void Add(TripsInputModel model)
+        public void Create(TripsInputModel model)
         {
             this.db.Trips.Add(new Trip
             {
-                ImagePath = model.ImagePath,
-                DepartureTime = DateTime.ParseExact(model.DepartureTime, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture),
                 StartPoint = model.StartPoint,
                 EndPoint = model.EndPoint,
+                DepartureTime = DateTime.ParseExact(model.DepartureTime, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture),
+                Seats = model.Seats,
                 Description = model.Description,
-                Seats = model.Seats
+                ImagePath = model.ImagePath,
             });
 
             this.db.SaveChanges();
@@ -35,40 +35,41 @@ namespace SharedTrip.Services
         {
             return this.db.Trips.Select(x => new TripsViewModel
             {
-                Id = x.Id,
                 StartPoint = x.StartPoint,
                 EndPoint = x.EndPoint,
                 DepartureTime = x.DepartureTime,
+                Seats = x.Seats,
+                Id = x.Id,
                 UsedSeats = x.UserTrips.Count,
-                Seats = x.Seats
-            }).ToList();
+            })
+                .ToList();
         }
 
-        public TripViewModel GetTripById(string id)
+        public TripViewModel GetTrip(string tripId)
         {
-            return this.db.Trips.Where(x => x.Id == id).Select(x => new TripViewModel
+            return this.db.Trips.Where(x => x.Id == tripId).Select(x => new TripViewModel
             {
                 Id = x.Id,
-                Description = x.Description,
+                Seats = x.Seats,
                 DepartureTime = x.DepartureTime,
-                UsedSeats = x.UserTrips.Count,
+                Description = x.Description,
                 StartPoint = x.StartPoint,
                 EndPoint = x.EndPoint,
                 ImagePath = x.ImagePath,
-                Seats = x.Seats
+                UsedSeats = x.UserTrips.Count,
             }).FirstOrDefault();
-        }
-
-        public bool HasAlreadyAddedUser(string tripId, string userId)
-        {
-            return this.db.UserTrips.Any(x => x.TripId == tripId && x.UserId == userId);
         }
 
         public bool HasSpace(string tripId)
         {
             int space = this.db.Trips.FirstOrDefault(x => x.Id == tripId).Seats;
 
-            return this.db.UserTrips.Where(x => x.TripId == tripId).Count() < space;
+            return space > this.db.UserTrips.Where(x => x.TripId == tripId).Count();
+        }
+
+        public bool IsUserAddedToTrip(string tripId, string userId)
+        {
+            return this.db.UserTrips.Any(x => x.TripId == tripId && x.UserId == userId);
         }
 
         public void Join(string tripId, string userId)
@@ -76,7 +77,7 @@ namespace SharedTrip.Services
             this.db.UserTrips.Add(new UserTrip
             {
                 TripId = tripId,
-                UserId = userId
+                UserId = userId,
             });
 
             this.db.SaveChanges();

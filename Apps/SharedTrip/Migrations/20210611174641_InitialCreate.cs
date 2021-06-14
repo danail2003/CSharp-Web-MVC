@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SharedTrip.Migrations
 {
-    public partial class InitializingDB : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,13 +11,13 @@ namespace SharedTrip.Migrations
                 name: "Trips",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StartPoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EndPoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Seats = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    StartPoint = table.Column<string>(nullable: false),
+                    EndPoint = table.Column<string>(nullable: false),
+                    DepartureTime = table.Column<DateTime>(nullable: false),
+                    Seats = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(maxLength: 80, nullable: false),
+                    ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,10 +28,10 @@ namespace SharedTrip.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(maxLength: 20, nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,12 +42,12 @@ namespace SharedTrip.Migrations
                 name: "UserTrips",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TripId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    TripId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTrips", x => new { x.UserId, x.TripId });
+                    table.PrimaryKey("PK_UserTrips", x => new { x.TripId, x.UserId });
                     table.ForeignKey(
                         name: "FK_UserTrips_Trips_TripId",
                         column: x => x.TripId,
@@ -63,9 +63,9 @@ namespace SharedTrip.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserTrips_TripId",
+                name: "IX_UserTrips_UserId",
                 table: "UserTrips",
-                column: "TripId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

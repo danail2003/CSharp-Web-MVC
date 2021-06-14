@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using SharedTrip.Services;
-using SharedTrip.ViewModels;
+﻿using SharedTrip.Services.Users;
+using SharedTrip.ViewModels.Users;
 using SUS.HTTP;
 using SUS.MvcFramework;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace SharedTrip.Controllers
 {
@@ -15,51 +18,11 @@ namespace SharedTrip.Controllers
             this.service = service;
         }
 
-        public HttpResponse Login()
-        {
-            if (this.IsUserSignedIn())
-            {
-                return this.Error("You've already logged in.");
-            }
-
-            return this.View();
-        }
-
-        [HttpPost]
-        public HttpResponse Login(string username, string password)
-        {
-            if (this.IsUserSignedIn())
-            {
-                return this.Error("You've already loggedIn.");
-            }
-
-            if (string.IsNullOrEmpty(username))
-            {
-                return this.Error("Username must be valid.");
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                return this.Error("Password must be valid.");
-            }
-
-            if (!this.service.IsUsernameAndPasswordMatch(username, password))
-            {
-                return this.Error("Username or Password doesn't match.");
-            }
-
-            string userId = this.service.GetUserId(username, password);
-
-            this.SignIn(userId);
-
-            return this.Redirect("/Trips/All");
-        }
-
         public HttpResponse Register()
         {
             if (this.IsUserSignedIn())
             {
-                return this.Error("You've already registered.");
+                return this.Redirect("/");
             }
 
             return this.View();
@@ -70,37 +33,37 @@ namespace SharedTrip.Controllers
         {
             if (this.IsUserSignedIn())
             {
-                return this.Error("You've already registered.");
-            }
-
-            if (string.IsNullOrEmpty(model.Username) || model.Username.Length < 5 || model.Username.Length > 20)
-            {
-                return this.Error("Username must be between 5 and 20 symbols long.");
-            }
-
-            if (string.IsNullOrEmpty(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
-            {
-                return this.Error("Email must be valid.");
-            }
-
-            if (string.IsNullOrEmpty(model.Password) || model.Password.Length < 6 || model.Password.Length > 20)
-            {
-                return this.Error("Password must be between 6 and 20 symbols long.");
-            }
-
-            if (model.Password != model.ConfirmPassword)
-            {
-                return this.Error("Password and Confirm Password must be same.");
-            }
-
-            if (this.service.IsUsernameAvailable(model.Username))
-            {
-                return this.Error("Username already exists.");
+                return this.Redirect("/");
             }
 
             if (this.service.IsEmailAvailable(model.Email))
             {
-                return this.Error("Email already exists.");
+                return this.View();
+            }
+
+            if (this.service.IsUsernameAvailable(model.Username))
+            {
+                return this.View();
+            }
+
+            if (string.IsNullOrEmpty(model.Username) || model.Username.Length < 5 || model.Username.Length > 20)
+            {
+                return this.View();
+            }
+
+            if (string.IsNullOrEmpty(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
+            {
+                return this.View();
+            }
+
+            if (string.IsNullOrEmpty(model.Password) || model.Password.Length < 6 || model.Password.Length > 20)
+            {
+                return this.View();
+            }
+
+            if (model.Password != model.ConfirmPassword)
+            {
+                return this.View();
             }
 
             this.service.Register(model);
@@ -108,11 +71,39 @@ namespace SharedTrip.Controllers
             return this.Redirect("/Users/Login");
         }
 
+        public HttpResponse Login()
+        {
+            if (this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
+
+            return this.View();
+        }
+
+        [HttpPost]
+        public HttpResponse Login(LoginInputModel model)
+        {
+            if (this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
+
+            if (!this.service.IsUsernameAndPasswordMatch(model))
+            {
+                return this.View();
+            }
+
+            this.SignIn(this.service.GetUserId(model));
+
+            return this.Redirect("/Trips/All");
+        }
+
         public HttpResponse Logout()
         {
             if (!this.IsUserSignedIn())
             {
-                return this.Error("You can't logout because you're not logged in.");
+                return this.Redirect("/Users/Login");
             }
 
             this.SignOut();

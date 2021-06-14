@@ -22,13 +22,14 @@ namespace SharedTrip.Data
 
         public DateTime DepartureTime { get; set; }
 
+        [Range(2, 6)]
         public int Seats { get; set; }
 
-        [Required]
+        [Required, MaxLength(80)]
         public string Description { get; set; }
 
         public string ImagePath { get; set; }
 
-        public ICollection<UserTrip> UserTrips { get; set; }
+        public virtual ICollection<UserTrip> UserTrips { get; set; }
     }
 }

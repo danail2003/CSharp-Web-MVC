@@ -7,7 +7,7 @@ namespace Suls
     {
         public static async Task Main()
         {
-            await Host.CreateHostAsync(new Startup(), 80);
+            await Host.CreateHostAsync(new Startup(), 443);
         }
     }
 }

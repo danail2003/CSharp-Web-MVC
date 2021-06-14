@@ -1,9 +1,11 @@
-﻿using SharedTrip.Services;
+﻿using SharedTrip.Services.Trips;
 using SharedTrip.ViewModels.Trips;
 using SUS.HTTP;
 using SUS.MvcFramework;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 namespace SharedTrip.Controllers
 {
@@ -16,11 +18,23 @@ namespace SharedTrip.Controllers
             this.service = service;
         }
 
+        public HttpResponse All()
+        {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
+
+            var viewModel = this.service.GetAll();
+
+            return this.View(viewModel);
+        }
+
         public HttpResponse Add()
         {
             if (!this.IsUserSignedIn())
             {
-                return this.Error("You must login first.");
+                return this.Redirect("/");
             }
 
             return this.View();
@@ -31,80 +45,68 @@ namespace SharedTrip.Controllers
         {
             if (!this.IsUserSignedIn())
             {
-                return this.Error("You must login first.");
+                return this.Redirect("/");
             }
 
-            if (string.IsNullOrEmpty(model.StartPoint))
+            if (string.IsNullOrEmpty(model.StartPoint) || string.IsNullOrEmpty(model.EndPoint))
             {
-                return this.Error("Start Point is required.");
-            }
-
-            if (string.IsNullOrEmpty(model.EndPoint))
-            {
-                return this.Error("End Point is required.");
-            }
-
-            if (!DateTime.TryParseExact(model.DepartureTime, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
-            {
-                return this.Error("Departure time must be in this format dd.MM.yyyy HH:mm");
+                return this.View();
             }
 
             if (model.Seats < 2 || model.Seats > 6)
             {
-                return this.Error("Seats must be between 2 and 6.");
+                return this.View();
             }
 
             if (string.IsNullOrEmpty(model.Description) || model.Description.Length > 80)
             {
-                return this.Error("Description must be 80 symbols long.");
+                return this.View();
             }
 
-            this.service.Add(model);
+            if (!DateTime.TryParseExact(model.DepartureTime, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            {
+                return this.View();
+            }
+
+            this.service.Create(model);
 
             return this.Redirect("/Trips/All");
-        }
-
-        public HttpResponse All()
-        {
-            if (!this.IsUserSignedIn())
-            {
-                return this.Error("You must login first.");
-            }
-
-            var viewModel = this.service.GetAll();
-
-            return this.View(viewModel);
         }
 
         public HttpResponse Details(string tripId)
         {
             if (!this.IsUserSignedIn())
             {
-                return this.Error("You must login first.");
+                return this.Redirect("/");
             }
 
-            var trip = this.service.GetTripById(tripId);
+            var viewModel = this.service.GetTrip(tripId);
 
-            return this.View(trip);
+            return this.View(viewModel);
         }
 
         public HttpResponse AddUserToTrip(string tripId)
         {
             string userId = this.GetUserId();
 
-            if (!this.service.HasSpace(tripId))
+            if (!this.IsUserSignedIn())
             {
-                return this.Error("No have enough space.");
+                return this.Redirect("/");
             }
 
-            if (this.service.HasAlreadyAddedUser(tripId, userId))
+            if (!this.service.HasSpace(tripId))
+            {
+                return this.View();
+            }
+
+            if (this.service.IsUserAddedToTrip(tripId, userId))
             {
                 return this.Redirect($"/Trips/Details?tripId={tripId}");
             }
 
             this.service.Join(tripId, userId);
 
-            return this.Redirect("/Trips/All");
+            return this.Redirect("/");
         }
     }
 }

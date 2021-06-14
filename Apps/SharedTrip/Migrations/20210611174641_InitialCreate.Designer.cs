@@ -10,15 +10,15 @@ using SharedTrip.Data;
 namespace SharedTrip.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210506071954_InitializingDB")]
-    partial class InitializingDB
+    [Migration("20210611174641_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("SharedTrip.Data.Trip", b =>
@@ -31,7 +31,8 @@ namespace SharedTrip.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(80)")
+                        .HasMaxLength(80);
 
                     b.Property<string>("EndPoint")
                         .IsRequired()
@@ -67,8 +68,8 @@ namespace SharedTrip.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -77,15 +78,15 @@ namespace SharedTrip.Migrations
 
             modelBuilder.Entity("SharedTrip.Data.UserTrip", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("TripId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "TripId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("TripId");
+                    b.HasKey("TripId", "UserId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserTrips");
                 });
@@ -103,20 +104,6 @@ namespace SharedTrip.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Trip");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SharedTrip.Data.Trip", b =>
-                {
-                    b.Navigation("UserTrips");
-                });
-
-            modelBuilder.Entity("SharedTrip.Data.User", b =>
-                {
-                    b.Navigation("UserTrips");
                 });
 #pragma warning restore 612, 618
         }
